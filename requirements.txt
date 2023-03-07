@@ -1,4 +1,7 @@
+streamlit
+pandas
+requests
+PIL
 fastapi
 uvicorn
-requests
 CORSMiddleware
