@@ -3,6 +3,8 @@ from PIL import Image
 
 st.markdown('# Meet our team')
 
+#Creating a background
+
 def add_bg_from_url():
     st.markdown(
          f"""
@@ -18,6 +20,8 @@ def add_bg_from_url():
      )
 
 add_bg_from_url()
+
+#Adding pictures to the page
 
 col1, col2 = st.columns(2)
 
