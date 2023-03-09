@@ -4,4 +4,4 @@ requests
 PIL
 fastapi
 uvicorn
-CORSMiddleware
+subprocesses

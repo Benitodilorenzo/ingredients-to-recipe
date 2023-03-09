@@ -1,6 +1,142 @@
+#functions used on FE
+
+#dictionary with a number corresponding to a fruit or vegetable
+int_EN_dict = {
+    "0": "Raspberry",
+    "1": "Avocado",
+    "2": "Apple Red 2",
+    "3": "Potato Sweet",
+    "4": "Lemon Meyer",
+    "5": "Grapefruit White",
+    "6": "Apple Golden 3",
+    "7": "Potato Red",
+    "8": "Plum 2",
+    "9": "Mango",
+    "10": "Kiwi",
+    "11": "Passion Fruit",
+    "12": "Eggplant",
+    "13": "Pear 2",
+    "14": "Tomato 2",
+    "15": "Rambutan",
+    "16": "Plum",
+    "17": "Pineapple",
+    "18": "Cucumber Ripe",
+    "19": "Pear",
+    "20": "Lychee",
+    "21": "Tomato 1",
+    "22": "Maracuja",
+    "23": "Pepper Yellow",
+    "24": "Tangelo",
+    "25": "Grape White 2",
+    "26": "Potato Red Washed",
+    "27": "Mandarine",
+    "28": "Melon Piel de Sapo",
+    "29": "Dates",
+    "30": "Fig",
+    "31": "Granadilla",
+    "32": "Nectarine Flat",
+    "33": "Blueberry",
+    "34": "Cherry Rainier",
+    "35": "Grape Blue",
+    "36": "Cherry 1",
+    "37": "Tomato 3",
+    "38": "Mango Red",
+    "39": "Chestnut",
+    "40": "Quince",
+    "41": "Pomegranate",
+    "42": "Orange",
+    "43": "Grape Pink",
+    "44": "Apple Golden 1",
+    "45": "Corn Husk",
+    "46": "Grapefruit Pink",
+    "47": "Pepper Orange",
+    "48": "Guava",
+    "49": "Banana Lady Finger",
+    "50": "Mulberry",
+    "51": "Nectarine",
+    "52": "Cactus fruit",
+    "53": "Cauliflower",
+    "54": "Strawberry",
+    "55": "Apple Pink Lady",
+    "56": "Plum 3",
+    "57": "Limes",
+    "58": "Peach",
+    "59": "Pear Stone",
+    "60": "Tomato Yellow",
+    "61": "Tomato Heart",
+    "62": "Grape White",
+    "63": "Banana",
+    "64": "Pear Kaiser",
+    "65": "Grape White 4",
+    "66": "Pear Red",
+    "67": "Mangostan",
+    "68": "Walnut",
+    "69": "Peach 2",
+    "70": "Papaya",
+    "71": "Apple Braeburn",
+    "72": "Beetroot",
+    "73": "Cantaloupe 1",
+    "74": "Cucumber Ripe 2",
+    "75": "Apple Red Yellow 1",
+    "76": "Ginger Root",
+    "77": "Tomato 4",
+    "78": "Pear Monster",
+    "79": "Kohlrabi",
+    "80": "Peach Flat",
+    "81": "Tomato not Ripened",
+    "82": "Nut Pecan",
+    "83": "Pomelo Sweetie",
+    "84": "Carambula",
+    "85": "Apple Red 3",
+    "86": "Cherry Wax Yellow",
+    "87": "Tamarillo",
+    "88": "Clementine",
+    "89": "Huckleberry",
+    "90": "Nut Forest",
+    "91": "Pitahaya Red",
+    "92": "Apple Red Yellow 2",
+    "93": "Apple Red Delicious",
+    "94": "Salak",
+    "95": "Pineapple Mini",
+    "96": "Banana Red",
+    "97": "Apple Crimson Snow",
+    "98": "Pepper Green",
+    "99": "Apple Granny Smith",
+    "100": "Pepino",
+    "101": "Strawberry Wedge",
+    "102": "Avocado ripe",
+    "103": "Pear Abate",
+    "104": "Cantaloupe 2",
+    "105": "Cherry 2",
+    "106": "Cherry Wax Black",
+    "107": "Physalis",
+    "108": "Redcurrant",
+    "109": "Kumquats",
+    "110": "Tomato Maroon",
+    "111": "Cherry Wax Red",
+    "112": "Pepper Red",
+    "113": "Watermelon",
+    "114": "Apple Golden 2",
+    "115": "Physalis with Husk",
+    "116": "Onion Red Peeled",
+    "117": "Hazelnut",
+    "118": "Grape White 3",
+    "119": "Kaki",
+    "120": "Onion Red",
+    "121": "Corn",
+    "122": "Apple Red 1",
+    "123": "Potato White",
+    "124": "Pear Forelle",
+    "125": "Pear Williams",
+    "126": "Tomato Cherry Red",
+    "127": "Onion White",
+    "128": "Apricot",
+    "129": "Cocos",
+    "130": "Lemon",
+}
 
 #dictonary where keys are ingredients in EN, values are DE ingredients in DE, sorted based on DE name so easy to see what has been translated to the same word
-translations = {
+EN_DE_dict = {
     "pineapple": "ananas",
     "pineapple mini": "ananas",
     "apple red 2": "apfel",
@@ -134,9 +270,35 @@ translations = {
     "onion white": "zwiebeln",
 }
 
+#create list out of dict based on threshold
+def filter_dict_by_value(input_dict,threshold):
+    """
+    Filters a dictionary by the value of its items.
+    """
+    result_list = []
+    for key, value in input_dict.items():
+        if value >= threshold:
+            result_list.append(key)
+    return result_list
+
+#returns a list of ingredients from the number given in a list
+def get_values_from_dict(input_list, input_dict):
+    """
+     Returns a list of values from the input dictionary that correspond to keys in the input list.
+    """
+    result_list = []
+    for item in input_list:
+        if item in input_dict:
+            result_list.append(input_dict[item])
+        else:
+            pass
+    return result_list
 
 #translate ingredients in EN to DE based on a dictionary
 def EN2DE(ingredients_EN, dictionary):
+    """
+    Translates a list of English ingredient names to German using a given dictionary.
+    """
     ingredients_DE = set()  # use set to ensure unique elements
     looked_up = set()  # keep track of already looked up items
     for item in ingredients_EN:
@@ -148,16 +310,25 @@ def EN2DE(ingredients_EN, dictionary):
             pass
     return list(ingredients_DE)  # convert set to list and return
 
+#hard coded URL link to visit
 def generate_restegourmet_url(mylist):
-    # Convert the list to a comma-separated string
+    """ Convert the list to a comma-separated string and Construct the URL string"""
     list_str = ",".join(mylist)
-    # Construct the URL string
     url = f"https://restegourmet.de/rezeptsuche/_/{list_str}/_"
     return url
 
 
-#to test, uncomment these
+
+#if needed, uncomment these
 #ingredients_EN = ["tomato yellow","hjkkjh","cactus fruit","grape white","grape white 3","redcurrant"]
 #my_ingredients = EN2DE(ingredients_EN,translations)
 #print(my_ingredients)
 #print(generate_restegourmet_url(my_ingredients))
+
+#import json
+#creating a class that puts double quotation marks on the key and value pairs
+#class mydict(dict):
+#        def __str__(self):
+#            return json.dumps(self)
+#EN_dict = mydict(int_to_EN_dict)
+#print(EN_dict)

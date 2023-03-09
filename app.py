@@ -1,10 +1,10 @@
 import streamlit as st
 from functions import *
-
+import requests
 
 #title
-st.markdown("""# Ingredients to recipes
-## Turn leftovers into gourmet meals in 2 steps!
+st.markdown("""# Image to recipes
+## Turn leftover ingredients into gourmet meals:
 ### 📷 1. Take a picture of your ingredients
 ### 📜 2. Get recipes
 """)
@@ -12,23 +12,39 @@ st.markdown("""# Ingredients to recipes
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 #file upload
-uploaded_file = st.file_uploader("Upload an image of your ingredients")
+uploaded_file = st.file_uploader("Upload an image of your ingredients", type=["jpg", "jpeg", "png"])
 
-#dummy ingredients, normally provided by API
-ingredients_EN = ["tomato yellow","cactus fruit","grape white","grape white 3","redcurrant"]
 
-#translate list to DE
-ingredients_DE = EN2DE(ingredients_EN,translations)
-
-#generate URL
-url_to_visit = generate_restegourmet_url(ingredients_DE)
-
-#if an image is uploaded, show recipe
+####you might need to adjust the api_url variable!!!!!!!
+# If an image is uploaded
 if uploaded_file is not None:
+    # Save the image to a temporary location
+    with open("temp_file_from_user.jpg", "wb") as f:
+        f.write(uploaded_file.getbuffer())
+
+    # Call the API with the image filename parameter
+    api_url = "http://127.0.0.1:8000/predict?"
+    params = {"image_filename": "temp_file_from_user.jpg"}
+    response = requests.get(api_url, params=params)
+
+    # convert API response which is a dict, to a list of classes (code names)
+    #threshold is used here!!!!
+    #uncomment st.write to see what is the API response
+    #st.write(response.json())
+    codes = filter_dict_by_value(response.json(),"0.2")
+
+    #convert codes to EN list
+    en_ingr = get_values_from_dict(codes,int_EN_dict)
     st.write("We found the following ingredients:")
-    st.write(", ".join(ingredients_EN))
+    st.write(", ".join(en_ingr))
+
+    #convert EN list to DE list
+    de_ingr = EN2DE(en_ingr, EN_DE_dict)
     st.write("To see some tasty recipes from restegourmet.de, click on the link below")
+    url_to_visit = generate_restegourmet_url(de_ingr)
     st.write(url_to_visit)
+
+
 
 #background image
 def add_bg_from_url():
