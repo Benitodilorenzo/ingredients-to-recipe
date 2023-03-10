@@ -1,7 +1,11 @@
+#dont forget to add secrets to streamlit cloud settings, just copy what's inside secrets.toml
+
+
 import streamlit as st
-from streamlit_option_menu import option_menu
 from functions import *
 import requests
+from backend.api.restegourmet import *
+import webbrowser
 
 #title
 st.markdown("""# Image to recipes
@@ -29,7 +33,7 @@ if uploaded_file is not None:
     response = requests.get(api_url, params=params)
 
     # convert API response which is a dict, to a list of classes (code names)
-    #threshold is used here!!!!
+    #!!!!!!!!threshold is used here!!!!
     #uncomment st.write to see what is the API response
     #st.write(response.json())
     codes = filter_dict_by_value(response.json(),"0.2")
@@ -45,6 +49,24 @@ if uploaded_file is not None:
     url_to_visit = generate_restegourmet_url(de_ingr)
     st.write(url_to_visit)
 
+    #hardcoded list
+    #everything = search_content("papaya,baby-ananas,mango,eier,kiwi")
+    everything = search_content("papaya,apfel,ananas,kiwi")
+
+    #ADJUST HOW MANY RECIPES WE SHOW
+    recipes = extract_from_hits(everything)[:4]
+
+    #widgets
+    num_columns = 3
+    for i in range(0, len(recipes), num_columns):
+        row = recipes[i:i+num_columns]
+        columns = st.columns(num_columns)
+        for j, recipe in enumerate(row):
+            with columns[j]:
+                st.image(recipe["image_url"], use_column_width=True)
+                #st.write(recipe["name"])
+                #st.write(recipe["url"])
+                st.markdown(f'<a href="{recipe["url"]}" target="_blank">{recipe["name"]}</a>', unsafe_allow_html=True)
 
 
 #background image
