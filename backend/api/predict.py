@@ -4,10 +4,9 @@ from fastapi import FastAPI
 
 
 detect_filename = "model/yolov7/detect.py"
-bestpt_filename = "model/yolov7/last_epoch_8.pt"
+bestpt_filename = "model/yolov7/best_13.pt"
 
 app = FastAPI()
-
 
 def change_extension_to_txt(file_name):
     """

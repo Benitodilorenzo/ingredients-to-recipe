@@ -3,3 +3,5 @@ model/
 *__pycache__*
 .envrc
 .python-version
+.streamlit/
+
