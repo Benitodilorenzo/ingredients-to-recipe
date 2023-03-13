@@ -8,7 +8,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://cdn.pixabay.com/photo/2017/10/22/20/42/table-2879213_960_720.jpg");
+             background-image: url("https://img.freepik.com/free-vector/pastel-yellow-soft-gradient-blur-background_53876-105434.jpg");
              background-attachment: fixed;
              background-size: cover
          }}
@@ -33,6 +33,3 @@ with col2:
     st.image('pages/Pratima.png', width = 200)
     st.markdown('#### Pavan Kumar Hosakere Mathada')
     st.image('pages/Pavan.png', width = 200)
-
-
-
