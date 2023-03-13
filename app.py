@@ -7,17 +7,35 @@ import requests
 from backend.api.restegourmet import *
 import webbrowser
 
+#background image
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://img.freepik.com/free-vector/pastel-yellow-soft-gradient-blur-background_53876-105434.jpg");
+             background-attachment: fixed;
+             background-size: cover
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
+add_bg_from_url()
+
+
 #title
-st.markdown("""# Image to recipes
-## Turn leftover ingredients into gourmet meals:
-### 📷 1. Take a picture of your ingredients
-### 📜 2. Get recipes
+st.markdown("""# VisionChef
+### Take a snap, cook like a pro!
+##### 📷 1. Take a picture of your leftover ingredients
+##### 📜 2. Get recipes for gourmet meals
 """)
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 #file upload
-uploaded_file = st.file_uploader("Upload an image of your ingredients", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
 
 ####you might need to adjust the api_url variable!!!!!!!
@@ -43,15 +61,23 @@ if uploaded_file is not None:
     st.write("We found the following ingredients:")
     st.write(", ".join(en_ingr))
 
-    #convert EN list to DE list
+    #convert EN list to DE
     de_ingr = EN2DE(en_ingr, EN_DE_dict)
-    st.write("To see some tasty recipes from restegourmet.de, click on the link below")
+
+    #get recipes via URL
+    st.write("To see some tasty recipes from restegourmet.de, click on the link")
     url_to_visit = generate_restegourmet_url(de_ingr)
     st.write(url_to_visit)
 
-    #hardcoded list
-    #everything = search_content("papaya,baby-ananas,mango,eier,kiwi")
-    everything = search_content("papaya,apfel,ananas,kiwi")
+    #get recipes via images and links
+    st.write("Here are some tasty from restegourmet.de:")
+    #st.write(de_ingr)
+    stuff = ",".join(de_ingr)
+    everything = search_content(stuff)
+    #st.write(stuff)
+
+    ##if you want to use hardcoded list
+    #everything = search_content("birne,nektarine")
 
     #ADJUST HOW MANY RECIPES WE SHOW
     recipes = extract_from_hits(everything)[:4]
@@ -67,21 +93,3 @@ if uploaded_file is not None:
                 #st.write(recipe["name"])
                 #st.write(recipe["url"])
                 st.markdown(f'<a href="{recipe["url"]}" target="_blank">{recipe["name"]}</a>', unsafe_allow_html=True)
-
-
-#background image
-def add_bg_from_url():
-    st.markdown(
-         f"""
-         <style>
-         .stApp {{
-             background-image: url("https://cdn.pixabay.com/photo/2017/10/22/20/42/table-2879213_960_720.jpg");
-             background-attachment: fixed;
-             background-size: cover
-         }}
-         </style>
-         """,
-         unsafe_allow_html=True
-     )
-
-add_bg_from_url()
