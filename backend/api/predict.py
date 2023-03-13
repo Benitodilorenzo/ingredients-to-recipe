@@ -63,7 +63,7 @@ def predict(image_filename: str):
 
     #delete generated files
     subprocess.run(['rm', f"runs/detect/exp/labels/{txt_filename}"])
-    subprocess.run(['rm', f"runs/detect/exp/{jpg_filename}"])
+    #subprocess.run(['rm', f"runs/detect/exp/{jpg_filename}"])
 
     #return dict where key is class, values is confidence
     return ingredients_conf_dict

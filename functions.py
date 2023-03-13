@@ -245,7 +245,7 @@ EN_DE_dict = {
     "beetroot": "rote-bete",
     "onion red peeled": "rote-zwiebel",
     "carambula": "sternfrucht",
-    "potato sweet": "süßkartoffeln",
+    "potato sweet": "susskartoffeln",
     "tamarillo": "tamarillo",
     "tomato 2": "tomaten",
     "tomato 1": "tomaten",
@@ -269,6 +269,11 @@ EN_DE_dict = {
     "onion red": "zwiebeln",
     "onion white": "zwiebeln",
 }
+
+#function that takes a dictionary and returns a list of its unique values
+def unique_values(dictionary):
+    return list(set(dictionary.values()))
+
 
 #create list out of dict based on threshold
 def filter_dict_by_value(input_dict,threshold):
@@ -317,6 +322,10 @@ def generate_restegourmet_url(mylist):
     url = f"https://restegourmet.de/rezeptsuche/_/{list_str}/_"
     return url
 
+#to conver ingredients into code
+def lookup_keys(lst, dct):
+    """Look up values in dictionary and return a list of corresponding keys."""
+    return [list(dct.keys())[list(dct.values()).index(value)] for value in lst]
 
 
 #if needed, uncomment these
