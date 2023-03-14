@@ -2,9 +2,5 @@ streamlit
 streamlit-option-menu
 numpy
 pandas
-json
-requests
-PIL
 fastapi
 uvicorn
-subprocesses
