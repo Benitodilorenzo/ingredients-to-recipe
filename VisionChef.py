@@ -75,7 +75,7 @@ example_images = [
 
 # Save uploaded file if available
 if uploaded_file is not None:
-    save_to_temp_file(uploaded_file)
+    #save_to_temp_file(uploaded_file)
 
 # Create the expandable element
 with st.expander("or select one from our examples"):
@@ -99,7 +99,7 @@ with st.expander("or select one from our examples"):
     # Determine which image to use and save it to the root folder if it's an example image
     if option == "My uploaded image" and uploaded_file is not None:
         image_url = "temp_file_from_user.jpg"
-        save_to_temp_file(uploaded_file)
+    #    save_to_temp_file(uploaded_file)
     elif option == "Example 1":
         image_url = example_images[0]
         save_image_to_root(image_url)
@@ -158,7 +158,7 @@ def call_api(uploaded_file):
     #!!!!!!!!threshold is used here!!!!
     #uncomment st.write to see what is the API response
     #st.write(response.json())
-    api_url = "https://recipes-phec24vmza-ew.a.run.app/predict"
+    api_url = "https://api-phec24vmza-ey.a.run.app/predict"
     params = {"image_filename": uploaded_file.getbuffer()}
     response = requests.post(api_url, files=params)
     return filter_dict_by_value(response.json(),"0.2")
