@@ -158,7 +158,7 @@ def call_api(uploaded_file):
     #!!!!!!!!threshold is used here!!!!
     #uncomment st.write to see what is the API response
     #st.write(response.json())
-    api_url = "https://api-phec24vmza-ey.a.run.app/predict"
+    api_url = "https://new-phec24vmza-ey.a.run.app/predict"
     params = {"image_filename": uploaded_file.getbuffer()}
     response = requests.post(api_url, files=params)
     return filter_dict_by_value(response.json(),"0.2")
