@@ -2,6 +2,34 @@
 
 #dictionary with a number corresponding to a fruit or vegetable
 int_EN_dict = {
+    "0": "Apple",
+    "1": "Avocado",
+    "2": "Banana",
+    "3": "Beetroot",
+    "4": "Broccoli",
+    "5": "Cauliflower",
+    "6": "Eggplant",
+    "7": "Granadilla",
+    "8": "Kiwi",
+    "9": "Kohlrabi",
+    "10": "Lemon",
+    "11": "Limes",
+    "12": "Mango",
+    "13": "Melon",
+    "14": "Onion",
+    "15": "Orange",
+    "16": "Pear",
+    "17": "Pepper",
+    "18": "Pineapple",
+    "19": "Pomegranate",
+    "20": "Potato",
+    "21": "Strawberry",
+    "22": "Tomato",
+    "23": "Watermelon",
+}
+
+"""
+olddict={
     "0": "Raspberry",
     "1": "Avocado",
     "2": "Apple Red 2",
@@ -134,11 +162,13 @@ int_EN_dict = {
     "129": "Cocos",
     "130": "Lemon",
 }
+"""
 
 #dictonary where keys are ingredients in EN, values are DE ingredients in DE, sorted based on DE name so easy to see what has been translated to the same word
 EN_DE_dict = {
     "pineapple": "ananas",
     "pineapple mini": "ananas",
+    "apple": "apfel",
     "apple red 2": "apfel",
     "apple golden 3": "apfel",
     "apple golden 1": "apfel",
@@ -169,6 +199,7 @@ EN_DE_dict = {
     "pear forelle": "birne",
     "pear williams": "birne",
     "cauliflower": "blumenkohl",
+    "broccoli": "broccoli",
     "cantaloupe 1": "cantaloupe-melone",
     "cantaloupe 2": "cantaloupe-melone",
     "clementine": "clementinen",
@@ -189,10 +220,12 @@ EN_DE_dict = {
     "blueberry": "heidelbeeren",
     "raspberry": "himbeere",
     "mulberry": "himbeere",
+    "Hokaido": "hokkaido-kurbis",
     "ginger root": "ingwer",
     "redcurrant": "johannisbeeren",
     "kaki": "kaki",
     "cactus fruit": "kaktusfeige",
+    "potato": "kartoffeln",
     "potato red": "kartoffeln",
     "potato red washed": "kartoffeln",
     "potato white": "kartoffeln",
@@ -222,6 +255,7 @@ EN_DE_dict = {
     "nectarine flat": "nektarine ",
     "orange": "orange",
     "papaya": "papaya",
+    "pepper": "paprika",
     "pepper yellow": "paprika",
     "pepper orange": "paprika",
     "pepper green": "paprika",
@@ -247,6 +281,7 @@ EN_DE_dict = {
     "carambula": "sternfrucht",
     "potato sweet": "susskartoffeln",
     "tamarillo": "tamarillo",
+    "tomato": "tomaten",
     "tomato 2": "tomaten",
     "tomato 1": "tomaten",
     "tomato 3": "tomaten",
@@ -262,12 +297,14 @@ EN_DE_dict = {
     "grape white": "trauben",
     "grape white 4": "trauben",
     "grape white 3": "trauben",
+    "meatcow": "rindfleisch",
     "walnut": "walnusse",
     "watermelon": "wassermelone",
     "lemon meyer": "zitrone",
     "lemon": "zitrone",
     "onion red": "zwiebeln",
     "onion white": "zwiebeln",
+    "onion": "zwiebeln",
 }
 
 #function that takes a dictionary and returns a list of its unique values
@@ -322,11 +359,21 @@ def generate_restegourmet_url(mylist):
     url = f"https://restegourmet.de/rezeptsuche/_/{list_str}/_"
     return url
 
-#to conver ingredients into code
+#to convert ingredients into code
 def lookup_keys(lst, dct):
     """Look up values in dictionary and return a list of corresponding keys."""
     return [list(dct.keys())[list(dct.values()).index(value)] for value in lst]
 
+
+
+#print(lookup_keys(["33","22"],int_EN_dict))
+
+# def generate_shell_command(shell_command):
+#     """
+#     Convert a list of command line arguments into a string that can be run as a shell command.
+#     """
+#     command_string = " ".join(shell_command)
+#     return command_string
 
 #if needed, uncomment these
 #ingredients_EN = ["tomato yellow","hjkkjh","cactus fruit","grape white","grape white 3","redcurrant"]
