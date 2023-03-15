@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 
 detect_filename = "model/yolov7/detect.py"
-bestpt_filename = "model/yolov7/best_13.pt"
+bestpt_filename = "model/yolov7/last_epoch_21.pt"
 
 app = FastAPI()
 
