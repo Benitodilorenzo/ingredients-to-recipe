@@ -153,13 +153,13 @@ def show_widgets(codes):
                 #st.write(recipe["url"])
                 st.markdown(f'<a href="{recipe["url"]}" target="_blank">{recipe["name"]}</a>', unsafe_allow_html=True)
 
-def call_api():
+def call_api(uploaded_file):
     # convert API response which is a dict, to a list of classes (code names)
     #!!!!!!!!threshold is used here!!!!
     #uncomment st.write to see what is the API response
     #st.write(response.json())
     api_url = "https://recipes-phec24vmza-ew.a.run.app/predict"
-    params = {"image_filename": open("temp_file_from_user.jpg", "rb")}
+    params = {"image_filename": uploaded_file.getbuffer()}
     response = requests.post(api_url, files=params)
     return filter_dict_by_value(response.json(),"0.2")
 
@@ -176,7 +176,7 @@ def relabel(codes):
 if uploaded_file is not None:
     with open("temp_file_from_user.jpg", "wb") as f:
         f.write(uploaded_file.getbuffer())
-    codes = call_api()
+    codes = call_api(uploaded_file)
     codes = relabel(codes)
     #show_URL(codes)
     show_widgets(codes)
