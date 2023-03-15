@@ -4,3 +4,4 @@ model/
 .envrc
 .python-version
 .streamlit/secrets.toml
+public/

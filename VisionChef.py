@@ -153,19 +153,22 @@ def show_widgets(codes):
                 #st.write(recipe["url"])
                 st.markdown(f'<a href="{recipe["url"]}" target="_blank">{recipe["name"]}</a>', unsafe_allow_html=True)
 
-def call_api(uploaded_file):
+def call_api(uploaded_file, is_buffer=False):
     # convert API response which is a dict, to a list of classes (code names)
     #!!!!!!!!threshold is used here!!!!
     #uncomment st.write to see what is the API response
     #st.write(response.json())
-    api_url = "https://new-phec24vmza-ey.a.run.app/predict"
-    params = {"image_filename": uploaded_file.getbuffer()}
+    api_url = "http://localhost:8080/predict"
+    params = {"image_filename": uploaded_file if is_buffer else uploaded_file.getbuffer()}
     response = requests.post(api_url, files=params)
+    print(response)
+    st.write(response.json())
     return filter_dict_by_value(response.json(),"0.2")
 
 def relabel(codes):
     with st.expander("You can re-label your ingredients"):
         #st.image(uploaded_file, use_column_width=True)
+        st.image("http://localhost:8080/public/local_img.jpg")
         selected = st.multiselect("", unique_values(int_EN_dict), get_values_from_dict(codes,int_EN_dict))
         #st.write("You selected:", selected)
         codes = lookup_keys(selected, int_EN_dict)
@@ -183,7 +186,21 @@ if uploaded_file is not None:
 
 
 if uploaded_file is None and option != "My uploaded image":
-    codes = call_api()
-    codes = relabel(codes)
-    #show_URL(codes)
-    show_widgets(codes)
+    if option == "Example 1":
+        file_tmp = example_images[0]
+        with open(file_tmp, 'rb') as f:
+            codes = call_api(f, True)
+            codes = relabel(codes)
+            show_widgets(codes)
+    if option == "Example 2":
+        file_tmp = example_images[1]
+        with open(file_tmp, 'rb') as f:
+            codes = call_api(f, True)
+            codes = relabel(codes)
+            show_widgets(codes)
+    if option == "Example 3":
+        file_tmp = example_images[2]
+        with open(file_tmp, 'rb') as f:
+            codes = call_api(f, True)
+            codes = relabel(codes)
+            show_widgets(codes)
