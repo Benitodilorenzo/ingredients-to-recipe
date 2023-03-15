@@ -159,8 +159,8 @@ def call_api():
     #uncomment st.write to see what is the API response
     #st.write(response.json())
     api_url = "https://recipes-phec24vmza-ew.a.run.app/predict"
-    params = {"image_filename": "temp_file_from_user.jpg"}
-    response = requests.get(api_url, params=params)
+    params = {"image_filename": open("temp_file_from_user.jpg", "rb")}
+    response = requests.post(api_url, files=params)
     return filter_dict_by_value(response.json(),"0.2")
 
 def relabel(codes):
