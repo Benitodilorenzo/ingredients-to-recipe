@@ -74,7 +74,7 @@ example_images = [
 ]
 
 # Save uploaded file if available
-if uploaded_file is not None:
+#if uploaded_file is not None:
     #save_to_temp_file(uploaded_file)
 
 # Create the expandable element
