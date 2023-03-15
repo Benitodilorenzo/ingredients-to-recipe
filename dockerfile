@@ -11,4 +11,5 @@ RUN pip install --upgrade pip
 RUN pip install thop
 RUN pip install -r /requirements.txt
 RUN pip install -r /model_requirements.txt
+RUN mkdir public
 CMD uvicorn predict:app --host 0.0.0.0 --app-dir /api --port $PORT
