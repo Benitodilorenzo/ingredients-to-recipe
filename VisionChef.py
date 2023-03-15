@@ -165,7 +165,7 @@ def call_api(uploaded_file):
 
 def relabel(codes):
     with st.expander("You can re-label your ingredients"):
-        st.image("runs/detect/exp/temp_file_from_user.jpg", use_column_width=True)
+        #st.image(uploaded_file, use_column_width=True)
         selected = st.multiselect("", unique_values(int_EN_dict), get_values_from_dict(codes,int_EN_dict))
         #st.write("You selected:", selected)
         codes = lookup_keys(selected, int_EN_dict)
