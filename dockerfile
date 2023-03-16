@@ -1,5 +1,4 @@
 FROM python:3.10.6-buster
-
 COPY backend/api /api
 COPY model /model
 COPY requirements.txt /requirements.txt
