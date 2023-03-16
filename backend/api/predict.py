@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 
 
 detect_filename = "model/yolov7/detect.py"
-bestpt_filename = "model/yolov7/last_epoch_21.pt"
+bestpt_filename = "model/yolov7/best1.pt"
 
 app = FastAPI()
 app.mount("/public", StaticFiles(directory="public"), name="static")
