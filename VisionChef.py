@@ -158,17 +158,17 @@ def call_api(uploaded_file, is_buffer=False):
     #!!!!!!!!threshold is used here!!!!
     #uncomment st.write to see what is the API response
     #st.write(response.json())
-    api_url = "http://localhost:8080/predict"
+    api_url = "https://model-phec24vmza-ey.a.run.app/predict"
     params = {"image_filename": uploaded_file if is_buffer else uploaded_file.getbuffer()}
     response = requests.post(api_url, files=params)
     print(response)
-    st.write(response.json())
+    #st.write(response.json())
     return filter_dict_by_value(response.json(),"0.2")
 
 def relabel(codes):
     with st.expander("You can re-label your ingredients"):
         #st.image(uploaded_file, use_column_width=True)
-        st.image("http://localhost:8080/public/local_img.jpg")
+        st.image("https://model-phec24vmza-ey.a.run.app/public/local_img.jpg")
         selected = st.multiselect("", unique_values(int_EN_dict), get_values_from_dict(codes,int_EN_dict))
         #st.write("You selected:", selected)
         codes = lookup_keys(selected, int_EN_dict)
