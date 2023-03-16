@@ -127,6 +127,7 @@ def show_widgets(codes):
     en_ingr = get_values_from_dict(codes, int_EN_dict)
     en_str = ", ".join(en_ingr)
     st.write(f"We found the following ingredients: {en_str}")
+    st.makrdown(f"# We found the following ingredients: **{en_str}**")
 
     # Convert EN list to DE for API
     de_ingr = EN2DE(en_ingr, EN_DE_dict)
